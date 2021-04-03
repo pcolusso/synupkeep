@@ -1,0 +1,45 @@
+image: alpine/latest
+packages:
+  - docker
+sources:
+  - https://git.sr.ht/~mser/synupkeep
+environment:
+  project: synupkeep
+  docker_image: mserajnik/synupkeep
+  docker_username: mserajnik
+secrets:
+  - 2be455df-9ff9-4803-bf5e-2c65d9d986a5
+tasks:
+  - skip_if_not_release: |
+      cd $project
+      git describe --exact-match HEAD || complete-build
+  - setup: |
+      curl -s https://api.github.com/repos/tomwright/dasel/releases/latest | \
+        grep browser_download_url | \
+        grep linux_amd64 | \
+        cut -d '"' -f 4 | \
+        xargs -n1 curl -Lso dasel && \
+        chmod +x dasel && \
+        sudo mv dasel /usr/local/bin/dasel
+      sudo addgroup $(whoami) docker
+      sudo service docker start
+  - build: |
+      cd $project
+
+      version=$(/usr/local/bin/dasel -f pyproject.toml -s "tool.poetry.version")
+
+      set +e
+
+      docker_ps_return=1
+      until [ ${docker_ps_return} -eq 0 ]; do
+        docker ps >/dev/null 2>&1
+        docker_ps_return=$?
+        sleep 1
+      done
+
+      set -e
+
+      docker build . -t $docker_image:latest -t $docker_image:$version
+  - publish: |
+      cat ~/.docker-hub-personal-access-token | docker login --username $docker_username --password-stdin
+      docker push $docker_image --all-tags
