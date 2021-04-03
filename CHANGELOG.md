@@ -8,8 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.0.0] - 2021-04-03
+
 ### Added
 
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/synupkeep/tree/develop
+[1.0.0]: https://git.sr.ht/~mser/synupkeep/tree/1.0.0
