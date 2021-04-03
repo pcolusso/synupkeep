@@ -1,0 +1,1 @@
+SYNUPKEEP_DOCKER_CRON_SCHEDULE cd /usr/src/app ; python -m synupkeep

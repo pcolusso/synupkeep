@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  app:
+    image: mserajnik/synupkeep:latest
+    command: cron # change to `run` to only run once instead of periodically via cron job
+    volumes:
+      - /path/to/synapse/data/directory:/data
+    environment:
+      - TZ=Etc/UTC
+      - 'SYNUPKEEP_POSTGRES_CONNECTION_STRING=host=localhost port=5432 user=synapse dbname=synapse password=password'
+      - SYNUPKEEP_SYNAPSE_API_URL=http://localhost:8008/
+      - SYNUPKEEP_SYNAPSE_AUTH_TOKEN=
+      - SYNUPKEEP_DELTA=86400
+      - SYNUPKEEP_LOGGING_LEVEL=INFO
+      - SYNUPKEEP_DOCKER_CRON_SCHEDULE=0 4 * * *

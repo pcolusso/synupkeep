@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "synupkeep"
+version = "1.0.0"
+description = "A program to upkeep Synapse servers"
+authors = ["Chris Braun <cryzed@googlemail.com>", "Michael Serajnik <m@mser.at>"]
+license = "AGPL-3.0-or-later"
+
+[tool.poetry.scripts]
+synupkeep = "synupkeep:main"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+loguru = "^0.5.3"
+postgres = "^3.0.0"
+requests = "^2.25.1"
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+mypy = "^0.812"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
