@@ -1,4 +1,6 @@
-# synupkeep [![builds.sr.ht status][build-status-badge]][build-status]
+# synupkeep [![Docker](https://github.com/pcolusso/synupkeep/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/pcolusso/synupkeep/actions/workflows/docker-publish.yml)
+
+*This is a personal fork for building arm64 images. The original repository is on [sourcehut](https://git.sr.ht/~mser/synupkeep)*
 
 > A program to upkeep Synapse servers
 
